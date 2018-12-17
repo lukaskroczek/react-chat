@@ -1,26 +1,17 @@
 import React from 'react';
 import * as styles from './Chat.module.css';
-import ContactDetailView from './ContactDetailView';
+import ContactDetailViewHandler from './ContactDetailViewHandler';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/chatActions';
 
-export default class Chat extends React.Component {
+class Chat extends React.Component {
   state = {
-    contacts: [],
-    loadError: false
+    loadError: false //TODO: set loadError
   };
 
-  //TODO: předělat na redux
   componentDidMount = () => {
-    fetch(`https://jsonplaceholder.typicode.com/users/`)
-      .then(async res => await res.json())
-      .then((users) => {
-        if (users) {
-          this.setState(() => ({ contacts: users }));
-        }
-        else {
-          this.setState(() => ({ loadError: true }));
-        }
-      })
+    this.props.getContacts();
   }
 
   renderContact = (contact) => (
@@ -28,15 +19,12 @@ export default class Chat extends React.Component {
       <Link to={`/${contact.id}`}>{contact.name}</Link>
     </div>)
 
-  renderContacts = () => (
-    <div className={styles.contactsMenu}>
-      <div className={styles.header}>Messenger</div>
-      <div className={styles.contacts}>
-        {this.state.contacts
-          .map(contact => this.renderContact(contact))}
-      </div>
-    </div>
-  )
+  renderContacts = () => {
+    if (this.props.contacts) {
+      return this.props.contacts
+        .map(contact => this.renderContact(contact))
+    }
+  }
 
   renderLoadingError = () => (<div className={styles.contactsDetail}>
     Error. Cannot load contacts.
@@ -50,11 +38,30 @@ export default class Chat extends React.Component {
       return (
         <Router>
           <div className={styles.mainWindow}>
+            <div className={styles.contactsMenu}>
+              <div className={styles.header}>Messenger</div>
+              <div className={styles.contacts}>
+                {this.renderContacts()}
+              </div>
+            </div>
 
-            {this.renderContacts()}
-            <Route path="/:id" component={ContactDetailView} />
+            <Route path="/:id" component={ContactDetailViewHandler} />
           </div>
         </Router>)
     }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    contacts: state.chatStorage.contacts
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getContacts: () => dispatch(actions.getContacts())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);
