@@ -15,6 +15,16 @@ class ContactDetailView extends React.Component {
     }
   }
 
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      const message = document.getElementById("inputBox");
+      this.props.sendMesageToContact(this.props.userId, message.innerText);
+      message.innerText = "";
+
+      e.preventDefault()
+    }    
+  }
+
   renderMessage = (message) => (<div key={message.id}>{message.title}</div>)
 
   renderMessages = () => {
@@ -39,7 +49,9 @@ class ContactDetailView extends React.Component {
       <div className={styles.messages}>
         {this.renderMessages()}
       </div>
-      <div className={styles.inputBox}>Input box</div>
+      <div className={styles.inputBoxArea}>
+        <span id="inputBox" className={styles.inputBox} onKeyPress={this.handleKeyPress} contentEditable placeholder="Enter text here..." />
+      </div>
     </div>)
 
   render = () => {
@@ -67,7 +79,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getSelectedContact: (userId) => dispatch(actions.getSelectedContact(userId)),
-    getMessagesForSelectedContact: (userId) => dispatch(actions.getMessagesForSelectedContact(userId))
+    getMessagesForSelectedContact: (userId) => dispatch(actions.getMessagesForSelectedContact(userId)),
+    sendMesageToContact: (userId, message) => dispatch(actions.sendMesageToContact(userId, message))
   }
 }
 

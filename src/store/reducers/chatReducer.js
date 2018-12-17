@@ -26,6 +26,12 @@ export const chatReducer = (state = initialState, action) => {
         selectedContact: state.selectedContact,
         selectedContactMessages: action.selectedContactMessages
       };
+      case actions.SEND_MESSAGE:
+      return {
+        contacts: state.contacts,
+        selectedContact: state.selectedContact,
+        selectedContactMessages: [...state.selectedContactMessages, action.message],
+      };
     default:
       return state;
   }

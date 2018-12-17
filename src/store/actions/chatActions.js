@@ -1,6 +1,7 @@
 export const GET_CONTACTS = "GET_CONTACTS";
 export const GET_SELECTED_USER = "GET_SELECTED_USER";
 export const GET_SELECTED_USER_MESSAGES = "GET_SELECTED_USER_MESSAGES";
+export const SEND_MESSAGE = "SEND_MESSAGE";
 
 export const getContacts = () => dispatch => {
   fetch(`https://jsonplaceholder.typicode.com/users/`)
@@ -31,4 +32,11 @@ export const getMessagesForSelectedContact = (userId) => dispatch => {
       type: GET_SELECTED_USER_MESSAGES,
       selectedContactMessages: messages
     }));
+}
+
+export const sendMesageToContact = (userId, messageText) => dispatch => {
+  dispatch({
+    type: SEND_MESSAGE,
+    message: {userId: userId,id:0,title:messageText}
+  })
 }

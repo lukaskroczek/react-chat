@@ -40,9 +40,23 @@
   flex-direction: column;
 }
 
-.inputBox {
+.inputBoxArea {
   justify-content: flex-end;
   border-top: 1px rgba(0, 0, 0, 0.1) solid;
+  padding: 10px; 
+}
+
+.inputBox {
+  width: 100%;
+  text-align: left;
+  display: block; /* For Firefox */
+}
+
+.inputBox:empty:before {
+  content: attr(placeholder);
+  text-align: left;
+  display: block; /* For Firefox */
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .messages {
