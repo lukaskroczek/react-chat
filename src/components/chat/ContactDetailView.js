@@ -42,7 +42,6 @@ class ContactDetailView extends React.Component {
     Loading
 </div>)
 
-  //TODO: input box, akce add message
   renderContactDetailView = () => (
     <div className={styles.contactsDetail}>
       <div className={styles.header}>{this.props.selectedContact.name}</div>

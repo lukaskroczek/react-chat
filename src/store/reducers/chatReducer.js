@@ -10,26 +10,22 @@ export const chatReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.GET_CONTACTS:
       return {
+        ...state,
         contacts: action.contacts,
-        selectedContact: state.selectedContact,
-        selectedContactMessages: state.selectedContactMessages
       };
     case actions.GET_SELECTED_USER:
       return {
-        contacts: state.contacts,
+        ...state,
         selectedContact: action.selectedContact,
-        selectedContactMessages: state.selectedContactMessages
       };
     case actions.GET_SELECTED_USER_MESSAGES:
       return {
-        contacts: state.contacts,
-        selectedContact: state.selectedContact,
+        ...state,
         selectedContactMessages: action.selectedContactMessages
       };
     case actions.SEND_MESSAGE:
       return {
-        contacts: state.contacts,
-        selectedContact: state.selectedContact,
+        ...state,
         selectedContactMessages: [...state.selectedContactMessages, action.message],
       };
     default:
