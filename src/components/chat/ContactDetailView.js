@@ -22,7 +22,7 @@ class ContactDetailView extends React.Component {
       message.innerText = "";
 
       e.preventDefault()
-    }    
+    }
   }
 
   renderMessage = (message) => (<div key={message.id}>{message.title}</div>)
