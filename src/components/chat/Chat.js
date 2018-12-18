@@ -58,10 +58,8 @@ const mapStateToProps = state => {
   };
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getContacts: () => dispatch(actions.getContacts())
-  }
+const mapDispatchToProps = {
+  getContacts: () => actions.getContacts()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

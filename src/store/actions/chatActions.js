@@ -3,40 +3,22 @@ export const GET_SELECTED_USER = "GET_SELECTED_USER";
 export const GET_SELECTED_USER_MESSAGES = "GET_SELECTED_USER_MESSAGES";
 export const SEND_MESSAGE = "SEND_MESSAGE";
 
-export const getContacts = () => dispatch => {
-  fetch(`https://jsonplaceholder.typicode.com/users/`)
-    .then(async res => await res.json())
-    .then((contacts) => dispatch({
-      type: GET_CONTACTS,
-      contacts: contacts
-    }));
-};
+export const getContacts = () => ({
+  type: GET_CONTACTS,
+});
 
-export const getSelectedContact = (userId) => dispatch => {
-  if (userId) {
-    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-      .then(async res => await res.json())
-      .then((loadedUser) => {
-        dispatch({
-          type: GET_SELECTED_USER,
-          selectedContact: loadedUser
-        });
-      });
-  }
-}
+export const getSelectedContact = (userId) => ({
+  type: GET_SELECTED_USER,
+  userId: userId
+});
 
-export const getMessagesForSelectedContact = (userId) => dispatch => {
-  fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
-    .then(async res => await res.json())
-    .then((messages) => dispatch({
-      type: GET_SELECTED_USER_MESSAGES,
-      selectedContactMessages: messages
-    }));
-}
+export const getMessagesForSelectedContact = (userId) => ({
+  type: GET_SELECTED_USER_MESSAGES,
+  userId: userId
+});
 
-export const sendMesageToContact = (userId, messageText) => dispatch => {
-  dispatch({
-    type: SEND_MESSAGE,
-    message: {userId: userId,id:0,title:messageText}
-  })
-}
+export const sendMesageToContact = (userId, message) => ({
+  type: SEND_MESSAGE,
+  userId: userId,
+  messageText: message
+});

@@ -75,12 +75,10 @@ const mapStateToProps = state => {
   };
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getSelectedContact: (userId) => dispatch(actions.getSelectedContact(userId)),
-    getMessagesForSelectedContact: (userId) => dispatch(actions.getMessagesForSelectedContact(userId)),
-    sendMesageToContact: (userId, message) => dispatch(actions.sendMesageToContact(userId, message))
-  }
+const mapDispatchToProps = {
+  getSelectedContact: (userId) => actions.getSelectedContact(userId),
+  getMessagesForSelectedContact: (userId) => actions.getMessagesForSelectedContact(userId),
+  sendMesageToContact: (userId, message) => actions.sendMesageToContact(userId, message)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactDetailView);
