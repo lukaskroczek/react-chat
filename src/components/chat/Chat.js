@@ -11,7 +11,7 @@ class Chat extends React.Component {
   };
 
   componentDidMount = () => {
-    this.props.getContacts();
+    this.props.loadContacts();
   }
 
   renderContact = (contact) => (
@@ -59,7 +59,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  getContacts: () => actions.getContacts()
+  loadContacts: () => actions.loadContacts()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

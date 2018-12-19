@@ -10,8 +10,8 @@ class ContactDetailView extends React.Component {
 
   componentDidMount = () => {
     if (this.props.userId) {
-      this.props.getSelectedContact(this.props.userId);
-      this.props.getMessagesForSelectedContact(this.props.userId);
+      this.props.loadSelectedContact(this.props.userId);
+      this.props.loadMessagesForSelectedContact(this.props.userId);
     }
   }
 
@@ -76,8 +76,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  getSelectedContact: (userId) => actions.getSelectedContact(userId),
-  getMessagesForSelectedContact: (userId) => actions.getMessagesForSelectedContact(userId),
+  loadSelectedContact: (userId) => actions.loadSelectedContact(userId),
+  loadMessagesForSelectedContact: (userId) => actions.loadMessagesForSelectedContact(userId),
   sendMesageToContact: (userId, message) => actions.sendMesageToContact(userId, message)
 }
 

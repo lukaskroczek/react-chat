@@ -1,4 +1,4 @@
-import * as actions from '../sagas/chatSagas';
+import * as actions from '../../store/actions/chatActions';
 
 const initialState = {
   contacts: [],
