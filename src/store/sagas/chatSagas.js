@@ -4,7 +4,7 @@ import * as effects from '../../store/effects/chatEffects';
 
 function* loadContacts() {
   try {
-    const contacts = yield call(effects.loadContacts);
+    const contacts = yield call(effects.fetchContacts);
     yield put(actions.loadContactsSuccess(contacts));
   } catch (e) {
     console.log(e)
@@ -15,7 +15,7 @@ function* loadContacts() {
 function* loadSelectedContact(action) {
   if (action.userId) {
     try {
-      const loadedContact = yield call(effects.loadSelectedContact, action.userId);
+      const loadedContact = yield call(effects.fetchSelectedContact, action.userId);
       yield put(actions.loadSelectedContactSuccess(loadedContact));
     } catch (e) {
       console.log(e)
@@ -26,7 +26,7 @@ function* loadSelectedContact(action) {
 
 function* loadMessagesForSelectedContact(action) {
   try {
-    const messages = yield call(effects.loadMessagesForSelectedContact, action.userId);
+    const messages = yield call(effects.fetchMessagesForSelectedContact, action.userId);
     yield put(actions.loadMessagesForSelectedContactSuccess(messages));
   } catch (e) {
     console.log(e)

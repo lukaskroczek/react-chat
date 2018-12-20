@@ -6,10 +6,6 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/chatActions';
 
 class Chat extends React.Component {
-  state = {
-    loadError: false //TODO: set loadError
-  };
-
   componentDidMount = () => {
     this.props.loadContacts();
   }
@@ -20,8 +16,8 @@ class Chat extends React.Component {
     </div>)
 
   renderContacts = () => {
-    if (this.props.contacts) {
-      return this.props.contacts
+    if (this.props.contacts.data) {
+      return this.props.contacts.data
         .map(contact => this.renderContact(contact))
     }
   }
@@ -30,8 +26,15 @@ class Chat extends React.Component {
     Error. Cannot load contacts.
 </div>)
 
+  renderLoadingContacts = () => (<div className={styles.contactsDetail}>
+    Loading
+</div>)
+
   render = () => {
-    if (this.state.loadError) {
+    if (this.props.contacts.error) {
+      return this.renderLoadingError();
+    }
+    else if (this.props.contacts.error) {
       return this.renderLoadingError();
     }
     else {

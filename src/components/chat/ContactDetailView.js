@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/chatActions';
 
 class ContactDetailView extends React.Component {
-  state = {
-    loadError: false //TODO: set loadError
-  }
-
   componentDidMount = () => {
     if (this.props.userId) {
       this.props.loadSelectedContact(this.props.userId);
@@ -28,8 +24,8 @@ class ContactDetailView extends React.Component {
   renderMessage = (message) => (<div key={message.id}>{message.title}</div>)
 
   renderMessages = () => {
-    if (this.props.selectedContactMessages) {
-      return this.props.selectedContactMessages
+    if (this.props.selectedContactMessages.data) {
+      return this.props.selectedContactMessages.data
         .map(message => this.renderMessage(message))
     }
   }
@@ -44,7 +40,7 @@ class ContactDetailView extends React.Component {
 
   renderContactDetailView = () => (
     <div className={styles.contactsDetail}>
-      <div className={styles.header}>{this.props.selectedContact.name}</div>
+      <div className={styles.header}>{this.props.selectedContact.contact.name}</div>
       <div className={styles.messages}>
         {this.renderMessages()}
       </div>
@@ -54,11 +50,11 @@ class ContactDetailView extends React.Component {
     </div>)
 
   render = () => {
-    if (this.state.loadError) {
+    if (this.props.selectedContact.error) {
       return this.renderLoadingError();
     }
     else {
-      if (this.props.selectedContact) {
+      if (this.props.selectedContact.contact) {
         return this.renderContactDetailView();
       }
       else {

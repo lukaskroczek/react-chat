@@ -19,7 +19,7 @@ export const loadContacts = () => ({
 
 export const loadContactsSuccess = (contacts) => ({
   type: GET_CONTACTS_SUCCESS,
-  contacts: contacts
+  contacts: { data: contacts, loading: false, error: false }
 });
 
 export const loadContactsFailed = () => ({
@@ -33,7 +33,7 @@ export const loadSelectedContact = (userId) => ({
 
 export const loadSelectedContactSuccess = (loadedContact) => ({
   type: GET_SELECTED_USER_SUCCESS,
-  selectedContact: loadedContact
+  selectedContact: { contact: loadedContact, error: false }
 });
 
 export const loadSelectedContactFailed = () => ({
@@ -47,10 +47,10 @@ export const loadMessagesForSelectedContact = (userId) => ({
 
 export const loadMessagesForSelectedContactSuccess = (messages) => ({
   type: GET_SELECTED_USER_MESSAGES_SUCCESS,
-  selectedContactMessages: messages
+  selectedContactMessages: { data: messages, loading: false, error: false }
 });
 
-export const loadMessagesForSelectedContactFailed = (userId) => ({
+export const loadMessagesForSelectedContactFailed = () => ({
   type: GET_SELECTED_USER_MESSAGES_FAILED
 });
 
